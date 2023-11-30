@@ -1,4 +1,4 @@
-let notas = [
+const notas = [
     {
         id: 1,
         titulo: 'Sacar la basura',
@@ -37,6 +37,7 @@ let notas = [
     },
 
 ]
+
 let switchNotasRealizadas = false
 let idGlobal = 8
 
@@ -44,8 +45,10 @@ let idGlobal = 8
 let tarjetas = document.getElementById("tarjetasNotas")
 document.addEventListener('DOMContentLoaded', pintarNotas(notas))
 
+
+
 function pintarNotas(notas) {
-    tarjetas.innerHTML = ''
+    tarjetas.innerHTML = ""
     if (notas.length === 0) {
         let element = document.createElement("div")
         element.classList.add("col-12")
@@ -63,7 +66,7 @@ function pintarNotas(notas) {
                     `<div class="card-header d-flex justify-content-between  align-items-center w-100" data-id="${notas[i].id}">
                          <input onClick = "marcarRealizada(${notas[i].id})" type="checkbox" ${notas[i].realizada ? "checked" : ""}> </input>
                          <h5 class="m-2">${notas[i].titulo}</h5>
-                         <a class="bi bi-trash3 text-danger clickeable" onClick = "eliminarNota(${notas[i].id})"></a>
+                         <a class="bi bi-trash" text-danger clickeable" onClick = "eliminarNota(${notas[i].id})"></a>
                      </div>
                      <div class="card-body">
                         <p class="card-text ${tachadas}">${notas[i].descripcion}</p>
@@ -81,7 +84,7 @@ function pintarNotas(notas) {
                     `<div class="card-header d-flex justify-content-between  align-items-center w-100" data-id="${notasRealizadas[i].id}">
                          <input onClick = "marcarRealizada(${notasRealizadas[i].id})" type="checkbox" ${notasRealizadas[i].realizada ? "checked" : ""}> </input>
                          <h5 class="m-2">${notasRealizadas[i].titulo}</h5>
-                         <a class="bi bi-trash3 text-danger clickeable" onClick = "eliminarNota(${notasRealizadas[i].id})"></a>
+                         <a class="bi bi-trash" text-danger clickeable" onClick = "eliminarNota(${notasRealizadas[i].id})"></a>
                      </div>
                      <div class="card-body">
                         <p class="card-text ${tachadas}">${notasRealizadas[i].descripcion}</p>
@@ -91,7 +94,6 @@ function pintarNotas(notas) {
         }
     }
 }
-
 
 let guardar = document.getElementById('guardar')
 guardar.addEventListener('click', crearNota)
@@ -113,7 +115,7 @@ function crearNota() {
 
 
 let borrarTexto = document.getElementById('borrar')
-borrarTexto.addEventListener('click', e => {
+borrarTexto.addEventListener("click", e => {
     let titulo = document.getElementById('tituloNota')
     let descripcion = document.getElementById('textoNota')
     titulo.value = ""
@@ -143,8 +145,14 @@ function marcarRealizada(id) {
     pintarNotas(notas)
 }
 
-function mostrarRealizadas() {
+function completadas() {
     switchNotasRealizadas = !switchNotasRealizadas;
-    console.log(switchNotasRealizadas);
     pintarNotas(notas);
 }
+
+function filtrarPalabra(notas, palabraClave) {
+    let arregloFiltrado = notas.filter(notas => notas.titulo.toLowerCase().includes(palabraClave.toLowerCase()) || notas.descripcion.toLowerCase().includes(palabraClave.toLowerCase()))
+    console.log(arregloFiltrado)
+    return arregloFiltrado
+}
+

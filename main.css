@@ -5,3 +5,7 @@
 .tachadas{
     text-decoration: line-through;
 }
+
+.filtro{
+    display: none;
+}
