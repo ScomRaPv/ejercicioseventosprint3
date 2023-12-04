@@ -40,12 +40,16 @@ const notas = [
 
 let switchNotasRealizadas = false
 let idGlobal = 8
+let buscador = document.getElementById("buscarPalabra")
 
 
 let tarjetas = document.getElementById("tarjetasNotas")
 document.addEventListener('DOMContentLoaded', pintarNotas(notas))
 
-
+ buscador.addEventListener("keyup", e => {
+    let nuevoArreglo = filtrarPalabra(notas, e.target.value)
+    pintarNotas(nuevoArreglo, tarjetas)
+})
 
 function pintarNotas(notas) {
     tarjetas.innerHTML = ""
@@ -152,7 +156,6 @@ function completadas() {
 
 function filtrarPalabra(notas, palabraClave) {
     let arregloFiltrado = notas.filter(notas => notas.titulo.toLowerCase().includes(palabraClave.toLowerCase()) || notas.descripcion.toLowerCase().includes(palabraClave.toLowerCase()))
-    console.log(arregloFiltrado)
-    return arregloFiltrado
+  return arregloFiltrado
 }
 
